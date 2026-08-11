@@ -1,116 +1,134 @@
-# 👓 VisionVogue — Luxury Eyewear & Contact Lens E-Commerce Platform
+<div align="center">
 
-[![Node.js](https://img.shields.io/badge/Node.js-v18%2B-brightgreen?logo=node.js)](https://nodejs.org/)
-[![Express.js](https://img.shields.io/badge/Express.js-v4.18-black?logo=express)](https://expressjs.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-VisionVogue-green?logo=mongodb)](https://www.mongodb.com/)
-[![EJS](https://img.shields.io/badge/Template-EJS-blue)](https://ejs.co/)
-[![Bootstrap](https://img.shields.io/badge/UI-Bootstrap%205.3-purple?logo=bootstrap)](https://getbootstrap.com/)
-[![GitHub](https://img.shields.io/badge/Repository-VisionVogue--E--Commerce--Website-181717?logo=github)](https://github.com/Rohitsuryawanshi19/VisionVogue-E-Commerce-Website)
+# 👓 VisionVogue
+### *Luxury Eyewear, Sunglasses & Contact Lens E-Commerce Platform*
 
-**VisionVogue** is a state-of-the-art luxury e-commerce platform for Eyeglasses, Sunglasses, Contact Lenses, and Special Power Lenses, engineered with **Node.js, Express, EJS, and MongoDB**. Inspired by industry leaders like Lenskart and Flipkart, it features real-time order tracking, dynamic UPI QR code payments with 5-minute timers, interactive 3D product previews, and a user profile vault.
+[![Node.js](https://img.shields.io/badge/Node.js-v18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-v4.18-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-VisionVogue-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-v5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+
+[Live Demo](http://localhost:5000) · [Report Bug](https://github.com/Rohitsuryawanshi19/VisionVogue-E-Commerce-Website/issues) · [Request Feature](https://github.com/Rohitsuryawanshi19/VisionVogue-E-Commerce-Website/issues)
+
+</div>
 
 ---
 
-## 🌟 Key Features
+## 📖 Overview
 
-### 🛒 1. Catalog & Product Discovery
-- **Mega-Menu Navigation**: Split categories for Eyeglasses, Sunglasses, Contact Lenses, and Men's/Women's showcase collections.
-- **Dataset Integration**: Pre-loaded with 1,300+ real product datasets complete with high-resolution frame gallery shots, model previews, and real customer review photos.
-- **Interactive Contact Lens Section**: Customized 3D packaging artwork for CooperVision, Bausch & Lomb, and Johnson & Johnson lenses (Acuvue Moist, Acuvue Oasys, Lacelle Color, BioTrue).
-- **Auto-Banner Slideshow**: Animated hero slider cycling banners every 4 seconds.
+**VisionVogue** is a flagship full-stack luxury e-commerce application designed for premium optical products. Built with **Node.js, Express.js, EJS, and MongoDB**, VisionVogue delivers a seamless shopping experience for Eyeglasses, Sunglasses, Contact Lenses, and Special Power Lenses.
 
-### 💳 2. Real-Time Order & Payment Automation
-- **Dynamic UPI QR Code Generator**: Generates real-time UPI payment QR codes (`upi://pay?pa=visionvogue@upi`) pre-filled with order subtotal.
-- **5-Minute Payment Countdown Clock**: Active session timer (`05:00` → `00:00`) with auto-cancellation on expiry.
-- **Interactive Credit Card Preview**: Live 3D card preview updating cardholder name, card number, and expiry in real-time.
-- **Automated Order Lifecycle**: Real-time fulfillment tracking through milestones: `Order Placed` ➔ `Optical Lab` ➔ `In Transit` ➔ `Delivered`.
+Inspired by top global e-commerce platforms like **Lenskart** and **Flipkart**, VisionVogue integrates real-time order lifecycle automation, dynamic 5-minute countdown UPI QR code payments, custom 3D contact lens packaging artwork, an optical prescription vault, and an AI-powered Virtual Try-On scanner.
 
-### 👤 3. User Dashboard & Rx Vault (`/auth/profile`)
-- **VIP Rewards**: Earn and redeem Vogue Reward Points on purchases.
-- **Prescription Vault**: Save and manage optical prescriptions (OD/OS SPH, CYL, AXIS, PD).
-- **Order History**: Track live orders with interactive progress bars.
-- **1-Click VIP Demo Login**: Instant login option for quick testing.
+---
 
-### 🕶️ 4. Virtual Try-On & Support Hub
-- **AI Virtual Try-On**: Drag-and-drop photo upload with animated facial feature scan and frame recommendations.
-- **Customer Support Portal**: Dedicated pages for Track Order, Returns & Exchange, Shipping Policy, and Stores locator.
+## ✨ Core Features & Highlights
+
+### 🛒 1. Catalog & Product Experience
+- **1,300+ Product Catalog**: Pre-seeded dataset featuring real optical product photography, multi-angle gallery views, and verified customer review photos.
+- **Categorized Mega-Menu**: Instant navigation for **Eyeglasses**, **Sunglasses**, **Contact Lenses**, **Men's Collection**, and **Special Power Lenses**.
+- **Contact Lens 3D Packaging**: Custom 3D package artwork for CooperVision, Bausch & Lomb, and Johnson & Johnson (Acuvue Moist, Acuvue Oasys, Lacelle Color, BioTrue).
+- **Auto-Banner Slideshow**: Seamless 4-second hero carousel showcasing seasonal collections.
+
+### 💳 2. Real-Time Order & Payment Engine
+- **Dynamic UPI QR Code Generator**: Generates real-time UPI payment QR codes (`upi://pay?pa=visionvogue@upi`) pre-filled with the exact subtotal.
+- **5-Minute Countdown Session Lock**: Active countdown clock (`05:00` → `00:00`) with automatic session expiry if unpaid.
+- **Interactive Credit Card Preview**: Live 3D card preview updating cardholder name, card number, and expiry date in real-time.
+- **Automated Lifecycle Fulfillment**: Real-time order progress tracking through stages: `Order Placed` ➔ `Optical Lab` ➔ `In Transit` ➔ `Delivered`.
+
+### 👤 3. Account Dashboard & Rx Vault (`/auth/profile`)
+- **Vogue Rewards Program**: Earn and redeem reward points on every checkout.
+- **Saved Prescription Vault**: Store and manage OD/OS SPH, CYL, AXIS, and PD prescription parameters.
+- **Live Order Timeline**: Track fulfillment progress with visual milestone progress bars.
+- **1-Click VIP Demo Login**: Instant login shortcut for quick demo testing.
+
+### 🕶️ 4. Virtual Try-On & Support System
+- **AI Virtual Try-On (`/virtual-try-on`)**: Interactive photo upload with laser scan animation and frame shape recommendations.
+- **Support Hub (`/support/*`)**: Integrated portal for Track Order, Returns & Exchanges, Shipping Policy, and Store Finder.
 - **Admin Dashboard (`/admin`)**: Real-time sales metrics, revenue analytics, stock alerts, and order management.
 
 ---
 
-## 🛠️ Technology Stack
+## 🛠️ Architecture & Tech Stack
 
-- **Backend**: Node.js, Express.js
-- **Database**: MongoDB (`mongodb://127.0.0.1:27017/VisionVogue`) via Mongoose ORM
-- **Frontend / Templating**: EJS (Embedded JavaScript), Vanilla CSS3, Bootstrap 5.3, FontAwesome 6
-- **Animations & FX**: GSAP 3.12, ScrollTrigger, Custom SVG Generators
-- **Authentication & Security**: bcryptjs, express-session, dotenv
-
----
-
-## 🚀 Quick Start Guide
-
-### Prerequisites
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community) installed and running locally on port `27017`
-
-### Installation & Run
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/Rohitsuryawanshi19/VisionVogue-E-Commerce-Website.git
-   cd VisionVogue-E-Commerce-Website
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment (`.env`)**:
-   Create a `.env` file in the root directory:
-   ```env
-   PORT=5000
-   MONGODB_URI=mongodb://127.0.0.1:27017/VisionVogue
-   SESSION_SECRET=visionvogue_luxury_eyewear_secret_2026
-   ```
-
-4. **Start the application**:
-   ```bash
-   node app.js
-   ```
-
-5. **Open in Browser**:
-   Navigate to **[http://localhost:5000](http://localhost:5000)**
-
----
-
-## 📂 Project Structure
-
-```
-VisionVogue/
-├── config/             # Database connection & MongoDB setup
-├── models/             # Mongoose schemas (User, Product, Order)
-├── routes/             # Express route handlers (auth, cart, products, support, admin)
-├── views/              # EJS template views
-│   ├── admin/          # Admin dashboard view
-│   ├── pages/          # Auth, Profile, Cart, Checkout, Virtual Try-On, Stores
-│   ├── partials/       # Header navbar, Footer, Product card components
-│   ├── products/       # Catalog & detail product pages
-│   └── support/        # Order tracking, Returns, Prescription guides
-├── public/             # Static assets (CSS, JS, SVG, image datasets)
-│   ├── css/            # Custom luxury styling rules
-│   ├── js/             # Hero slider, Main app, Virtual try-on scripts
-│   └── images/         # Product collections, team photos, contact lens artwork
-├── app.js              # Express application entry point
-├── package.json        # Project metadata & dependencies
-└── README.md           # Documentation
+```mermaid
+graph TD
+    User([User Browser]) -->|HTTP / REST| Express[Express.js Server]
+    Express -->|EJS Rendering| Views[EJS Views & Bootstrap UI]
+    Express -->|Mongoose ORM| MongoDB[(MongoDB: VisionVogue)]
+    Express -->|Static Files| Assets[Public Assets & Product Datasets]
 ```
 
+| Layer | Technologies Used |
+| :--- | :--- |
+| **Backend Framework** | Node.js (v18+), Express.js (v4.18) |
+| **Database & ORM** | MongoDB (`mongodb://127.0.0.1:27017/VisionVogue`), Mongoose (v8.1) |
+| **Frontend & UI** | EJS (Embedded JavaScript), Bootstrap 5.3, Vanilla CSS3, FontAwesome 6 |
+| **Animations** | GSAP 3.12, ScrollTrigger |
+| **Security & Session** | bcryptjs, express-session, dotenv |
+
 ---
 
-## 👤 Author & License
+## 🚦 API Route Reference
 
-- **Developer**: Rohit Suryawanshi ([@Rohitsuryawanshi19](https://github.com/Rohitsuryawanshi19))
+| Route Endpoint | Method | Description |
+| :--- | :--- | :--- |
+| `/` | `GET` | Homepage with hero slider, category grid & new arrivals |
+| `/products` | `GET` | Complete product catalog with filters (shape, price, gender) |
+| `/products/category/:category` | `GET` | Filtered product catalog by category |
+| `/products/:id` | `GET` | Detailed product view with lens upgrades & prescription form |
+| `/cart` | `GET / POST` | Shopping cart bag & item quantity updates |
+| `/checkout` | `GET / POST` | Payment page with UPI QR code generator & 5-min timer |
+| `/auth/profile` | `GET` | Account dashboard, reward points & optical Rx vault |
+| `/support/track-order` | `GET / POST` | Real-time order lifecycle tracking portal |
+| `/admin` | `GET` | Admin analytics, inventory stock & order management |
+
+---
+
+## 💻 Installation & Local Setup
+
+### 1. Prerequisites
+Ensure you have the following installed on your machine:
+- **Node.js** (v18.0.0 or higher)
+- **MongoDB Server** running locally on port `27017`
+
+### 2. Clone Repository
+```bash
+git clone https://github.com/Rohitsuryawanshi19/VisionVogue-E-Commerce-Website.git
+cd VisionVogue-E-Commerce-Website
+```
+
+### 3. Install Dependencies
+```bash
+npm install
+```
+
+### 4. Configure Environment Variables (`.env`)
+Create a `.env` file in the root project directory:
+```env
+PORT=5000
+MONGODB_URI=mongodb://127.0.0.1:27017/VisionVogue
+SESSION_SECRET=visionvogue_luxury_eyewear_secret_2026
+```
+
+### 5. Launch Dev Server
+```bash
+node app.js
+```
+
+Visit **`http://localhost:5000`** in your browser.
+
+---
+
+## 👨‍💻 Author
+
+Developed with ❤️ by **Rohit Suryawanshi**
+- **GitHub**: [@Rohitsuryawanshi19](https://github.com/Rohitsuryawanshi19)
 - **Repository**: [VisionVogue-E-Commerce-Website](https://github.com/Rohitsuryawanshi19/VisionVogue-E-Commerce-Website)
-- **License**: MIT License
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
