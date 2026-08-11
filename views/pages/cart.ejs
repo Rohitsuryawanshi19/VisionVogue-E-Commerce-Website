@@ -1,0 +1,192 @@
+<%- include('../partials/header', { pageTitle: 'Your Shopping Bag — VisionVogue Luxury Eyewear' }) %>
+
+<div class="container-xl" style="padding-top:40px; padding-bottom:90px;">
+
+  <!-- Page Header & Step Tracker -->
+  <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom reveal">
+    <div>
+      <span class="text-gold text-uppercase fw-semibold" style="letter-spacing:1.5px; font-size:12px;">Checkout Journey</span>
+      <h1 class="font-display display-5 text-dark fw-bold mb-0">Your Shopping Bag</h1>
+    </div>
+    <div class="d-flex align-items-center gap-3 mt-3 mt-md-0" style="font-size:13px; letter-spacing:0.5px;">
+      <span class="fw-bold text-dark border-bottom border-2 border-gold pb-1"><i class="fa-solid fa-bag-shopping me-1 text-gold"></i> 1. Shopping Bag</span>
+      <span class="text-muted"><i class="fa-solid fa-chevron-right text-light mx-1"></i></span>
+      <span class="text-muted"><i class="fa-solid fa-truck me-1"></i> 2. Shipping & Fitting</span>
+      <span class="text-muted"><i class="fa-solid fa-chevron-right text-light mx-1"></i></span>
+      <span class="text-muted"><i class="fa-solid fa-circle-check me-1"></i> 3. Order Confirmed</span>
+    </div>
+  </div>
+
+  <% if (cart.length === 0) { %>
+    <!-- Empty Cart State -->
+    <div class="text-center py-5 bg-white rounded-4 shadow-sm border my-4 reveal">
+      <div class="mx-auto mb-3" style="width:80px; height:80px; background:var(--cream); color:var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:36px;">
+        <i class="fa-solid fa-bag-shopping"></i>
+      </div>
+      <h2 class="font-display h3 fw-bold text-dark mb-2">Your Shopping Bag is Currently Empty</h2>
+      <p class="text-muted mx-auto mb-4" style="max-width:480px; font-size:15px;">
+        Explore our handcrafted Italian acetate eyeglasses, polarized sunglasses, or digital blue-shield lenses to find your statement pair.
+      </p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="/products" class="btn btn-dark btn-lg px-4 py-2" style="background:var(--dark-grey); color:var(--gold);">Explore All Collections <i class="fa-solid fa-arrow-right ms-2"></i></a>
+        <a href="/virtual-try-on" class="btn btn-outline-dark btn-lg px-4 py-2">Try Virtually <i class="fa-solid fa-wand-magic-sparkles ms-2"></i></a>
+      </div>
+    </div>
+  <% } else { %>
+    <!-- Free Shipping Notice Bar -->
+    <div class="alert alert-dark bg-dark text-white border-0 p-3 rounded-3 shadow-sm mb-4 d-flex align-items-center justify-content-between reveal">
+      <div class="d-flex align-items-center">
+        <i class="fa-solid fa-truck-fast text-gold fs-4 me-3"></i>
+        <div>
+          <strong class="text-gold d-block" style="font-size:14px;">Complimentary Express Delivery Unlocked!</strong>
+          <span class="text-white-50 small">Your order qualifies for 100% free nationwide courier + custom protective hardcase.</span>
+        </div>
+      </div>
+      <span class="badge bg-gold text-dark font-mono d-none d-sm-inline-block">FREE SHIPPING</span>
+    </div>
+
+    <div class="row g-4">
+      <!-- Items List -->
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white">
+          <div class="d-flex justify-content-between align-items-center pb-3 border-bottom mb-3">
+            <span class="fw-bold text-dark" style="font-size:15px;"><%= cart.reduce((sum, i) => sum + i.qty, 0) %> Item(s) Selected</span>
+            <span class="text-muted small"><i class="fa-solid fa-shield-halved text-gold me-1"></i> 1-Year Warranty Included</span>
+          </div>
+
+          <div class="cart-items-wrapper">
+            <% cart.forEach((item, i) => { %>
+              <div class="py-3 border-bottom position-relative">
+                <div class="row align-items-center g-3">
+                  <!-- Thumbnail Image -->
+                  <div class="col-3 col-sm-2">
+                    <div class="rounded-3 bg-light p-2 text-center" style="border: 1px solid #eee;">
+                      <img src="<%= item.image %>" alt="<%= item.name %>" class="img-fluid" style="max-height:80px; object-fit:contain;">
+                    </div>
+                  </div>
+
+                  <!-- Details -->
+                  <div class="col-9 col-sm-5">
+                    <h5 class="font-display h5 fw-bold text-dark mb-1"><%= item.name %></h5>
+                    <div class="text-gold small mb-1" style="font-size:12.5px;">
+                      <i class="fa-solid fa-layer-group me-1"></i> <%= item.lensUpgrade %>
+                    </div>
+                    <% if (item.prescription && (item.prescription.sphOD || item.prescription.sphOS)) { %>
+                      <span class="badge bg-light text-dark border" style="font-size:11px;">
+                        <i class="fa-solid fa-file-prescription text-gold me-1"></i> Rx Attached
+                      </span>
+                    <% } %>
+                    <div class="text-muted small mt-1">Base: ₹<%= item.price.toLocaleString('en-IN') %> <% if(item.lensPrice > 0){ %>+ Lens: ₹<%= item.lensPrice.toLocaleString('en-IN') %><% } %></div>
+                  </div>
+
+                  <!-- Quantity Stepper -->
+                  <div class="col-6 col-sm-3">
+                    <div class="d-flex align-items-center justify-content-start justify-content-sm-center">
+                      <form action="/cart/update/<%= i %>" method="POST" class="d-inline">
+                        <input type="hidden" name="qty" value="<%= item.qty - 1 %>">
+                        <button type="submit" class="btn btn-outline-secondary btn-sm px-2 py-1" style="border-radius:6px;" <%= item.qty <= 1 ? 'disabled' : '' %>>
+                          <i class="fa-solid fa-minus" style="font-size:11px;"></i>
+                        </button>
+                      </form>
+                      <span class="fw-bold px-3" style="font-size:15px;"><%= item.qty %></span>
+                      <form action="/cart/update/<%= i %>" method="POST" class="d-inline">
+                        <input type="hidden" name="qty" value="<%= item.qty + 1 %>">
+                        <button type="submit" class="btn btn-outline-secondary btn-sm px-2 py-1" style="border-radius:6px;">
+                          <i class="fa-solid fa-plus" style="font-size:11px;"></i>
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+
+                  <!-- Item Total & Delete -->
+                  <div class="col-6 col-sm-2 text-end">
+                    <div class="fw-bold text-dark h6 mb-1">
+                      ₹<%= ((item.price + item.lensPrice) * item.qty).toLocaleString('en-IN') %>
+                    </div>
+                    <form action="/cart/remove/<%= i %>" method="POST" class="d-inline">
+                      <button type="submit" class="btn btn-link text-danger p-0 border-0 text-decoration-none small" style="font-size:13px;" title="Remove Item">
+                        <i class="fa-solid fa-trash-can me-1"></i> Remove
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            <% }) %>
+          </div>
+
+          <!-- Extra Shopping Actions -->
+          <div class="d-flex justify-content-between align-items-center mt-4 pt-2">
+            <a href="/products" class="text-dark small fw-semibold text-decoration-underline">
+              <i class="fa-solid fa-arrow-left me-1"></i> Continue Shopping
+            </a>
+            <span class="text-muted small"><i class="fa-solid fa-rotate-left me-1 text-gold"></i> 14-Day Free Returns</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary Card -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm p-4 rounded-4 bg-white sticky-top" style="top:90px;">
+          <h3 class="font-display h4 fw-bold text-dark mb-3 pb-2 border-bottom">Order Summary</h3>
+
+          <div class="d-flex justify-content-between mb-2" style="font-size:14.5px;">
+            <span class="text-muted">Bag Subtotal</span>
+            <span class="fw-semibold">₹<%= subtotal.toLocaleString('en-IN') %></span>
+          </div>
+
+          <div class="d-flex justify-content-between mb-2" style="font-size:14.5px;">
+            <span class="text-muted">Custom Lens Fitting Fee</span>
+            <span class="fw-bold text-success"><i class="fa-solid fa-gift me-1"></i> FREE</span>
+          </div>
+
+          <div class="d-flex justify-content-between mb-2" style="font-size:14.5px;">
+            <span class="text-muted">Insured Express Courier</span>
+            <span class="fw-bold text-success"><i class="fa-solid fa-truck-shield me-1"></i> FREE</span>
+          </div>
+
+          <div class="d-flex justify-content-between mb-3" style="font-size:14.5px;">
+            <span class="text-muted">Applicable Taxes (GST 18%)</span>
+            <span class="text-muted small">Included</span>
+          </div>
+
+          <!-- Coupon Code Input -->
+          <div class="p-3 bg-light rounded-3 border mb-3">
+            <label class="form-label small fw-semibold text-uppercase mb-1">Promo / Privilege Code</label>
+            <div class="input-group">
+              <input type="text" id="couponInput" class="form-control form-control-sm border-secondary text-uppercase" placeholder="e.g. LUXURY15">
+              <button class="btn btn-dark btn-sm px-3" type="button" onclick="const code = document.getElementById('couponInput').value.trim(); if(code) alert('Coupon code \'' + code + '\' applied! 15% discount will be reflected at checkout.');">Apply</button>
+            </div>
+          </div>
+
+          <div class="border-top pt-3 mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="text-uppercase fw-bold text-dark" style="letter-spacing:1px; font-size:13px;">Total Amount</span>
+                <span class="text-muted d-block small">Inclusive of all taxes</span>
+              </div>
+              <div class="font-display display-6 fw-bold text-dark">
+                ₹<%= subtotal.toLocaleString('en-IN') %>
+              </div>
+            </div>
+          </div>
+
+          <a href="/checkout" class="btn btn-dark btn-lg w-100 fw-semibold py-3 mb-3" style="background:var(--dark-grey); color:var(--gold); border-radius:10px; font-size:16px;">
+            Proceed to Secure Checkout <i class="fa-solid fa-lock ms-2"></i>
+          </a>
+
+          <!-- Trust Badges -->
+          <div class="text-center pt-2 border-top">
+            <div class="d-flex justify-content-center gap-3 text-muted small mb-2" style="font-size:12px;">
+              <span><i class="fa-solid fa-shield text-gold me-1"></i> SSL Encrypted</span>
+              <span><i class="fa-solid fa-certificate text-gold me-1"></i> Certified Lenses</span>
+            </div>
+            <span class="text-muted" style="font-size:11.5px;">We accept UPI, Credit/Debit Cards, NetBanking & COD</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% } %>
+
+</div>
+
+<%- include('../partials/footer') %>

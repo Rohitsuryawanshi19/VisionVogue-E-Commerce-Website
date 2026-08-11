@@ -1,0 +1,31 @@
+<%- include('../partials/header', { pageTitle: 'Our Stores — VisionVogue' }) %>
+
+<div class="container-xl" style="padding:60px 24px 90px;">
+  <div class="text-center reveal" style="margin-bottom:40px;">
+    <h2 style="font-size:38px;">Visit a VisionVogue Store</h2>
+    <p style="color:var(--text-muted);">Experience our frames in person with a complimentary eye consultation.</p>
+  </div>
+  <div class="row">
+    <% const stores = [
+      { city: 'Mumbai', area: 'Bandra West', hours: '10 AM – 9 PM' },
+      { city: 'Delhi', area: 'Connaught Place', hours: '10 AM – 9 PM' },
+      { city: 'Indore', area: 'Vijay Nagar', hours: '11 AM – 9 PM' },
+      { city: 'Bengaluru', area: 'Indiranagar', hours: '10 AM – 9 PM' },
+      { city: 'Pune', area: 'FC Road', hours: '10 AM – 8:30 PM' },
+      { city: 'Hyderabad', area: 'Banjara Hills', hours: '10 AM – 9 PM' }
+    ]; %>
+    <% stores.forEach(s => { %>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="sidebar-filter reveal" style="height:100%;">
+          <i class="fa-solid fa-location-dot" style="color:var(--gold);font-size:20px;"></i>
+          <h4 style="margin:12px 0 4px;"><%= s.city %></h4>
+          <p style="color:var(--text-muted);font-size:14px;margin-bottom:6px;"><%= s.area %></p>
+          <p style="font-size:13px;color:#999;"><i class="fa-regular fa-clock"></i> <%= s.hours %></p>
+          <a href="#" class="btn-outline-lux" style="margin-top:14px;display:inline-block;">Get Directions</a>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

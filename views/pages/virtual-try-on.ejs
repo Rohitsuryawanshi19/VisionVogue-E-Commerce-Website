@@ -1,0 +1,43 @@
+<%- include('../partials/header', { pageTitle: 'Virtual Try-On — VisionVogue' }) %>
+
+<div class="container-xl" style="padding:60px 24px 90px;">
+  <div class="text-center reveal" style="margin-bottom:40px;">
+    <div class="hero-eyebrow" style="color:var(--gold);">AI-Powered</div>
+    <h2 style="font-size:38px;">Virtual Try-On Studio</h2>
+    <p style="color:var(--text-muted);">Upload a photo and let our AI detect your face shape and recommend frames.</p>
+  </div>
+
+  <div class="vto-stage reveal">
+    <div id="vtoStep1">
+      <div class="dropzone" id="vtoDropzone">
+        <i class="fa-solid fa-cloud-arrow-up" style="font-size:38px;color:var(--gold);"></i>
+        <p style="margin-top:14px;font-weight:600;">Click or drag & drop your photo here</p>
+        <p style="font-size:12.5px;color:var(--text-muted);">JPG, PNG up to 5MB — processed only in your browser</p>
+      </div>
+      <input type="file" id="vtoFileInput" accept="image/*" style="display:none;">
+    </div>
+
+    <div id="vtoStep2" style="display:none;">
+      <div class="scan-frame">
+        <img id="vtoScanImg" src="" alt="Scanning">
+        <div class="laser-line"></div>
+      </div>
+      <p style="margin-top:20px;font-weight:600;color:var(--gold);"><i class="fa-solid fa-wand-magic-sparkles"></i> Analyzing facial structure...</p>
+    </div>
+
+    <div id="vtoStep3" style="display:none;">
+      <div class="face-result">
+        <i class="fa-solid fa-circle-check" style="font-size:42px;color:var(--success);"></i>
+        <h3 style="margin:16px 0 4px;">Face Shape: <span id="vtoResultShape" class="text-gold">Oval</span></h3>
+        <p style="color:var(--text-muted);margin-bottom:16px;">Recommended frame styles for you:</p>
+        <div id="vtoResultChips"></div>
+        <div style="margin-top:30px;display:flex;gap:14px;justify-content:center;">
+          <a href="/products" class="btn-lux">Shop Recommended Frames</a>
+          <button id="vtoRestart" class="btn-outline-lux">Try Another Photo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer', { extraScripts: '<script src="/js/vto.js"></script>' }) %>

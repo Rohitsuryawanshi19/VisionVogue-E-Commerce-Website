@@ -1,0 +1,51 @@
+<%- include('../partials/header', { pageTitle: 'VIP Member Login — VisionVogue' }) %>
+
+<div class="container-xl" style="max-width:520px; padding:70px 24px;">
+  <div class="card border-0 shadow-lg p-4 p-md-5 rounded-4 bg-white reveal">
+    <div class="text-center mb-4">
+      <span class="badge bg-dark text-gold px-3 py-2 text-uppercase mb-2" style="letter-spacing:2px; font-size:10.5px;">Luxury Member Portal</span>
+      <h2 class="font-display display-5 fw-bold text-dark mb-1">Welcome Back</h2>
+      <p class="text-muted small">Sign in to access your orders, reward points, and saved prescription vault.</p>
+    </div>
+
+    <!-- Quick Demo Login Banner -->
+    <div class="p-3 bg-light rounded-3 border border-gold mb-4 text-center">
+      <span class="text-gold fw-bold small d-block mb-1"><i class="fa-solid fa-crown me-1"></i> Testing Account Dashboard?</span>
+      <a href="/auth/demo-login" class="btn btn-dark btn-sm w-100 fw-semibold" style="background:var(--dark-grey); color:var(--gold);">
+        1-Click VIP Demo Login <i class="fa-solid fa-bolt ms-1 text-gold"></i>
+      </a>
+      <span class="text-muted small d-block mt-1" style="font-size:11px;">Instantly logs you in with sample orders & 1,250 Vogue Points!</span>
+    </div>
+
+    <form action="/auth/login" method="POST">
+      <div class="mb-3">
+        <label class="form-label small fw-semibold text-uppercase">Email Address *</label>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="fa-regular fa-envelope text-muted"></i></span>
+          <input type="email" name="email" class="form-control border-start-0 fs-6" placeholder="name@example.com" required>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <label class="form-label small fw-semibold text-uppercase">Password *</label>
+        </div>
+        <div class="input-group">
+          <span class="input-group-text bg-light border-end-0"><i class="fa-solid fa-lock text-muted"></i></span>
+          <input type="password" name="password" class="form-control border-start-0 fs-6" placeholder="••••••••" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-dark btn-lg w-100 fw-semibold py-3 mb-3" style="background:var(--dark-grey); color:var(--gold); border-radius:10px;">
+        Sign In To Account <i class="fa-solid fa-arrow-right ms-2"></i>
+      </button>
+    </form>
+
+    <div class="text-center pt-3 border-top">
+      <p class="mb-1 small">New to VisionVogue? <a href="/auth/register" class="text-gold fw-bold text-decoration-underline">Create an account (Get 450 Bonus Points)</a></p>
+      <p class="mb-0 small text-muted">Or continue browsing as <a href="/" class="text-secondary">Guest</a></p>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

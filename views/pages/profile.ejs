@@ -1,0 +1,213 @@
+<%- include('../partials/header', { pageTitle: userDoc.name + ' — My Account Dashboard' }) %>
+
+<div class="container-xl" style="padding-top:40px; padding-bottom:90px;">
+
+  <!-- Profile Hero Banner -->
+  <div class="card border-0 shadow-sm p-4 p-md-5 rounded-4 mb-4 text-white reveal" style="background: linear-gradient(135deg, #1c1c1c 0%, #2b2b2b 60%, #3d2c1e 100%);">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-4">
+      <div class="d-flex align-items-center gap-3">
+        <div class="rounded-circle bg-gold text-dark font-display fw-bold d-flex align-items-center justify-content-center shadow" style="width:72px; height:72px; font-size:30px;">
+          <%= userDoc.name.charAt(0).toUpperCase() %>
+        </div>
+        <div>
+          <div class="d-flex align-items-center gap-2 mb-1">
+            <h1 class="font-display h2 fw-bold text-white mb-0"><%= userDoc.name %></h1>
+            <span class="badge bg-gold text-dark px-2 py-1" style="font-size:11px; letter-spacing:0.5px;"><i class="fa-solid fa-crown me-1"></i> <%= userDoc.membershipTier || 'Gold VIP Member' %></span>
+          </div>
+          <p class="text-white-50 small mb-0"><i class="fa-solid fa-envelope me-1"></i> <%= userDoc.email %> <% if (userDoc.phone) { %>· <i class="fa-solid fa-phone ms-2 me-1"></i> <%= userDoc.phone %><% } %></p>
+        </div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <a href="/support/track-order" class="btn btn-outline-light btn-sm px-3 py-2"><i class="fa-solid fa-truck-fast me-1"></i> Track Orders</a>
+        <a href="/auth/logout" class="btn btn-warning btn-sm px-3 py-2 fw-semibold" style="background:var(--gold); border:none; color:#1c1c1c;"><i class="fa-solid fa-right-from-bracket me-1"></i> Logout</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Statistics Grid -->
+  <div class="row g-4 mb-5 reveal">
+    <!-- Reward Points Card -->
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm p-4 h-100 rounded-4 bg-white">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-gold text-uppercase fw-semibold" style="letter-spacing:1px; font-size:11.5px;">Vogue Rewards</span>
+          <div class="icon-wrap" style="width:40px; height:40px; background:rgba(201,163,92,0.15); color:var(--gold); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px;">
+            <i class="fa-solid fa-coins"></i>
+          </div>
+        </div>
+        <div class="display-6 font-display fw-bold text-dark mb-1"><%= (userDoc.rewardPoints || 450).toLocaleString('en-IN') %> <span style="font-size:16px;" class="text-muted fw-normal">Pts</span></div>
+        <p class="text-muted small mb-3">Equivalent to <strong class="text-dark">₹<%= (userDoc.rewardPoints || 450).toLocaleString('en-IN') %></strong> store discount credit on your next eyewear order.</p>
+        <button class="btn btn-outline-dark btn-sm mt-auto" onclick="alert('Your <%= userDoc.rewardPoints || 450 %> Vogue Points can be applied at checkout for an instant discount!')">
+          Redeem Points <i class="fa-solid fa-arrow-right ms-1"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Orders Stat Card -->
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm p-4 h-100 rounded-4 bg-white">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-gold text-uppercase fw-semibold" style="letter-spacing:1px; font-size:11.5px;">My Orders</span>
+          <div class="icon-wrap" style="width:40px; height:40px; background:rgba(201,163,92,0.15); color:var(--gold); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px;">
+            <i class="fa-solid fa-box-archive"></i>
+          </div>
+        </div>
+        <div class="display-6 font-display fw-bold text-dark mb-1"><%= orders.length %></div>
+        <p class="text-muted small mb-3"><%= orders.length > 0 ? 'Latest order #' + orders[0].orderNumber + ' is ' + orders[0].status : 'No active orders placed yet.' %></p>
+        <a href="#ordersSection" class="btn btn-outline-dark btn-sm mt-auto">
+          View Order History <i class="fa-solid fa-chevron-down ms-1"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Prescription Vault Card -->
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm p-4 h-100 rounded-4 bg-white">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <span class="text-gold text-uppercase fw-semibold" style="letter-spacing:1px; font-size:11.5px;">Saved Prescription</span>
+          <div class="icon-wrap" style="width:40px; height:40px; background:rgba(201,163,92,0.15); color:var(--gold); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px;">
+            <i class="fa-solid fa-file-prescription"></i>
+          </div>
+        </div>
+        <div class="h5 font-display fw-bold text-dark mb-1">OD: <%= userDoc.prescription ? userDoc.prescription.sphOD : '-2.25' %> | OS: <%= userDoc.prescription ? userDoc.prescription.sphOS : '-2.50' %></div>
+        <p class="text-muted small mb-3">Pupillary Distance: <strong class="text-dark"><%= userDoc.prescription ? userDoc.prescription.pd : '63mm' %></strong>. Presaved for fast 1-click lens checkout.</p>
+        <a href="#rxVault" class="btn btn-outline-dark btn-sm mt-auto">
+          Manage Rx Vault <i class="fa-solid fa-pen-to-square ms-1"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order History Section -->
+  <div id="ordersSection" class="card border-0 shadow-sm p-4 p-md-5 rounded-4 bg-white mb-5 reveal">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+      <div>
+        <span class="text-gold text-uppercase fw-semibold" style="letter-spacing:1px; font-size:11.5px;">Purchases</span>
+        <h3 class="font-display h4 fw-bold text-dark mb-0">Order History & Tracking</h3>
+      </div>
+      <a href="/support/track-order" class="btn btn-dark btn-sm" style="background:var(--dark-grey); color:var(--gold);">Track Package <i class="fa-solid fa-magnifying-glass-location ms-1"></i></a>
+    </div>
+
+    <% if (orders.length === 0) { %>
+      <div class="text-center py-4 text-muted">
+        <i class="fa-solid fa-box-open mb-2" style="font-size:36px; color:#ccc;"></i>
+        <p class="mb-2">You haven't placed any orders yet.</p>
+        <a href="/products" class="btn btn-outline-dark btn-sm">Shop Eyewear Collections</a>
+      </div>
+    <% } else { %>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0" style="font-size:14px;">
+          <thead class="table-dark">
+            <tr>
+              <th>Order #</th>
+              <th>Date</th>
+              <th>Items</th>
+              <th>Total Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% orders.forEach(o => { %>
+              <tr>
+                <td class="fw-bold">#<%= o.orderNumber %></td>
+                <td class="text-muted"><%= new Date(o.createdAt).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }) %></td>
+                <td>
+                  <% if (o.items && o.items.length > 0) { %>
+                    <span class="fw-semibold"><%= o.items[0].name %></span> <%= o.items.length > 1 ? '+' + (o.items.length - 1) + ' more' : '' %>
+                  <% } else { %>
+                    VisionVogue Eyewear
+                  <% } %>
+                </td>
+                <td class="fw-bold">₹<%= (o.totalAmount || 0).toLocaleString('en-IN') %></td>
+                <td>
+                  <span class="badge <%= o.status === 'Delivered' ? 'bg-success' : o.status === 'In Transit' ? 'bg-info text-dark' : 'bg-warning text-dark' %>">
+                    <i class="fa-solid fa-circle-dot me-1"></i> <%= o.status || 'Processing' %>
+                  </span>
+                </td>
+                <td>
+                  <a href="/support/track-order?order=<%= o.orderNumber %>" class="btn btn-outline-dark btn-sm">Track <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- Prescription Vault Details Section -->
+  <div id="rxVault" class="bg-white p-4 p-md-5 rounded-4 shadow-sm border mb-5 reveal">
+    <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+      <div>
+        <span class="text-gold text-uppercase fw-semibold" style="letter-spacing:1px; font-size:11.5px;">Optical Specs</span>
+        <h3 class="font-display h4 fw-bold text-dark mb-0">Prescription Vault (Rx Card)</h3>
+      </div>
+      <span class="badge bg-light text-dark border px-3 py-2"><i class="fa-solid fa-shield-check text-gold me-1"></i> Verified Doctor's Prescription</span>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="p-4 rounded-4 bg-dark text-white shadow-sm">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="font-display h5 text-gold mb-0"><i class="fa-solid fa-eye me-2"></i> Right Eye (OD)</h4>
+            <span class="text-white-50 small">Oculus Dexter</span>
+          </div>
+          <div class="row text-center g-2">
+            <div class="col-4">
+              <div class="p-2 bg-secondary rounded text-white">
+                <span class="text-white-50 d-block small">SPH</span>
+                <strong class="h6 mb-0 text-gold"><%= userDoc.prescription ? userDoc.prescription.sphOD : '-2.25' %></strong>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-secondary rounded text-white">
+                <span class="text-white-50 d-block small">CYL</span>
+                <strong class="h6 mb-0"><%= userDoc.prescription ? userDoc.prescription.cylOD : '-0.75' %></strong>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-secondary rounded text-white">
+                <span class="text-white-50 d-block small">AXIS</span>
+                <strong class="h6 mb-0"><%= userDoc.prescription ? userDoc.prescription.axisOD : '90°' %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="p-4 rounded-4 bg-dark text-white shadow-sm">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="font-display h5 text-gold mb-0"><i class="fa-solid fa-eye me-2"></i> Left Eye (OS)</h4>
+            <span class="text-white-50 small">Oculus Sinister</span>
+          </div>
+          <div class="row text-center g-2">
+            <div class="col-4">
+              <div class="p-2 bg-secondary rounded text-white">
+                <span class="text-white-50 d-block small">SPH</span>
+                <strong class="h6 mb-0 text-gold"><%= userDoc.prescription ? userDoc.prescription.sphOS : '-2.50' %></strong>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-secondary rounded text-white">
+                <span class="text-white-50 d-block small">CYL</span>
+                <strong class="h6 mb-0"><%= userDoc.prescription ? userDoc.prescription.cylOS : '-1.00' %></strong>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="p-2 bg-secondary rounded text-white">
+                <span class="text-white-50 d-block small">AXIS</span>
+                <strong class="h6 mb-0"><%= userDoc.prescription ? userDoc.prescription.axisOS : '180°' %></strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%- include('../partials/footer') %>

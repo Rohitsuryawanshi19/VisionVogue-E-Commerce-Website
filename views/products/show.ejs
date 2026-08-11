@@ -1,0 +1,213 @@
+<%
+  const images = product.images || [];
+  const reviewImages = product.reviewImages || [];
+  const discountedPrice = product.discount > 0 ? Math.round(product.price * (1 - product.discount / 100)) : product.price;
+%>
+<%- include('../partials/header', { pageTitle: product.name + ' — VisionVogue' }) %>
+
+<div class="container-xl" style="padding-top:36px;">
+  <div class="row">
+    <!-- Gallery -->
+    <div class="col-lg-6">
+      <div class="pdp-gallery reveal">
+        <div class="pdp-thumbs">
+          <% images.forEach((img, i) => { %>
+            <div class="pdp-thumb <%= i===0 ? 'active' : '' %>" data-img="<%= img %>">
+              <img src="<%= img %>" alt="angle <%= i %>">
+            </div>
+          <% }) %>
+        </div>
+        <div class="pdp-main-image">
+          <img src="<%= product.image %>" id="pdpMainImage" alt="<%= product.name %>">
+          <div class="vto-trigger" data-bs-toggle="modal" data-bs-target="#vtoModal">
+            <i class="fa-solid fa-camera"></i> Virtual Try-On
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info & Customization -->
+    <div class="col-lg-6">
+      <div class="pdp-info reveal">
+        <div class="brand-tag" style="text-transform:uppercase;font-size:12px;color:var(--text-muted);letter-spacing:0.5px;"><%= product.brand %> · <%= product.style %></div>
+        <h1><%= product.name %></h1>
+        <div class="stars">
+          <% for(let s=0; s<5; s++){ %><i class="fa-solid fa-star"></i><% } %>
+          <span style="color:#999;font-size:13px;"> <%= product.rating %> (<%= product.reviewCount %> reviews)</span>
+        </div>
+        <div class="pdp-price-row">
+          <span class="now" id="pdpLivePrice" data-base="<%= discountedPrice %>">₹<%= discountedPrice.toLocaleString('en-IN') %></span>
+          <% if (product.discount > 0) { %><span class="price-old" style="font-size:18px;">₹<%= product.price.toLocaleString('en-IN') %></span>
+          <span style="color:var(--success);font-weight:600;font-size:13.5px;"><%= product.discount %>% off</span><% } %>
+        </div>
+        <p style="color:var(--text-muted);font-size:14.5px;line-height:1.6;"><%= product.description %></p>
+
+        <form class="add-to-cart-form" id="pdpAddForm">
+          <input type="hidden" name="productId" value="<%= product.id %>">
+          <input type="hidden" name="qty" id="qtyHidden" value="1">
+          <input type="hidden" name="lensUpgrade" id="selectedLensName" value="Standard Lenses">
+          <input type="hidden" name="lensPrice" id="selectedLensPrice" value="0">
+          <input type="hidden" name="prescription" id="prescriptionData" value="">
+
+          <div>
+            <h5 style="font-size:13px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:10px;">Product Type</h5>
+            <div class="type-pills">
+              <div class="type-pill active" data-pill>Powered Eyeglasses</div>
+              <div class="type-pill" data-pill>Zero Power (Screen)</div>
+              <div class="type-pill" data-pill>Reading Glasses</div>
+            </div>
+          </div>
+
+          <div>
+            <h5 style="font-size:13px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:10px;">Frame Color</h5>
+            <div class="color-dots">
+              <div class="color-dot active" data-pill style="background:<%= product.color %>;"></div>
+              <div class="color-dot" data-pill style="background:#1c1c1c;"></div>
+              <div class="color-dot" data-pill style="background:#8b5e34;"></div>
+              <div class="color-dot" data-pill style="background:#1e3a5f;"></div>
+            </div>
+          </div>
+
+          <div>
+            <h5 style="font-size:13px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:10px;">Frame Size</h5>
+            <div class="size-pills">
+              <% ['S','M','L','XL'].forEach(sz => { %>
+                <div class="size-pill <%= product.frameSize === sz ? 'active' : '' %>" data-pill><%= sz %></div>
+              <% }) %>
+            </div>
+          </div>
+
+          <div>
+            <h5 style="font-size:13px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:10px;">Lens Upgrades</h5>
+            <div class="lens-option selected" data-name="Standard Lenses" data-price="0">
+              <div><div class="lens-name">Standard Lenses</div><div class="lens-desc">Included with frame</div></div>
+              <div class="lens-add">Included</div>
+            </div>
+            <div class="lens-option" data-name="Blue Cut Lens" data-price="2490">
+              <div><div class="lens-name">Blue Cut Lens</div><div class="lens-desc">Reduces digital eye strain</div></div>
+              <div class="lens-add">+₹2,490</div>
+            </div>
+            <div class="lens-option" data-name="Photochromic Transition" data-price="4150">
+              <div><div class="lens-name">Photochromic Transition</div><div class="lens-desc">Auto-darkens in sunlight</div></div>
+              <div class="lens-add">+₹4,150</div>
+            </div>
+            <div class="lens-option" data-name="Active Polarized" data-price="3320">
+              <div><div class="lens-name">Active Polarized</div><div class="lens-desc">Glare-free outdoor clarity</div></div>
+              <div class="lens-add">+₹3,320</div>
+            </div>
+          </div>
+
+          <div class="prescription-accordion">
+            <div class="accordion-head">
+              <span><i class="fa-solid fa-eye" style="color:var(--gold);margin-right:8px;"></i>Enter Prescription (Optional)</span>
+              <i class="fa-solid fa-chevron-down" style="transition:transform .3s;"></i>
+            </div>
+            <div class="accordion-body">
+              <div class="rx-eye-label">Right Eye (OD)</div>
+              <div class="rx-grid">
+                <input type="text" name="od_sph" placeholder="SPH">
+                <input type="text" name="od_cyl" placeholder="CYL">
+                <input type="text" name="od_axis" placeholder="AXIS">
+              </div>
+              <div class="rx-eye-label" style="margin-top:16px;">Left Eye (OS)</div>
+              <div class="rx-grid">
+                <input type="text" name="os_sph" placeholder="SPH">
+                <input type="text" name="os_cyl" placeholder="CYL">
+                <input type="text" name="os_axis" placeholder="AXIS">
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h5 style="font-size:13px;text-transform:uppercase;letter-spacing:0.6px;color:var(--text-muted);margin-bottom:10px;">Quantity</h5>
+            <div class="qty-control">
+              <button type="button" id="qtyMinus">−</button>
+              <span id="qtyDisplay">1</span>
+              <button type="button" id="qtyPlus">+</button>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button type="submit" class="btn-outline-lux btn-add-cart" style="flex:1;">Add to Cart</button>
+            <button type="submit" formaction="/cart/add" class="btn-lux" style="flex:1;justify-content:center;">Buy Now</button>
+          </div>
+        </form>
+
+        <form id="pincodeForm" class="pincode-check">
+          <input type="text" id="pincodeInput" placeholder="Enter delivery pincode" maxlength="6">
+          <button type="submit" class="btn-outline-lux">Check</button>
+        </form>
+        <div id="pincodeResult" class="pincode-result"></div>
+
+        <div class="trust-badges">
+          <div class="trust-badge"><i class="fa-solid fa-rotate-left"></i> No Questions Asked Returns</div>
+          <div class="trust-badge"><i class="fa-solid fa-arrows-rotate"></i> Easy 14-Day Exchange</div>
+          <div class="trust-badge"><i class="fa-solid fa-shield-halved"></i> 365 Days Warranty</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="pdp-tabs reveal">
+    <div class="tab-nav">
+      <div class="tab-btn active" data-tab="tabSpecs">Specifications</div>
+      <div class="tab-btn" data-tab="tabReviews">Reviews</div>
+    </div>
+    <div class="tab-panel active" id="tabSpecs">
+      <table class="spec-table">
+        <tr><td>Material</td><td><%= product.material %></td></tr>
+        <tr><td>Weight</td><td><%= product.weight %></td></tr>
+        <tr><td>Eye Size</td><td><%= product.eyeSize %></td></tr>
+        <tr><td>Bridge Width</td><td><%= product.bridgeWidth %></td></tr>
+        <tr><td>Temple Length</td><td><%= product.templeLength %></td></tr>
+        <tr><td>Gender</td><td><%= product.gender %></td></tr>
+        <tr><td>Frame Shape</td><td><%= product.style %></td></tr>
+      </table>
+    </div>
+    <div class="tab-panel" id="tabReviews">
+      <div class="rating-summary">
+        <div class="rating-big"><%= product.rating %></div>
+        <div>
+          <div class="stars" style="font-size:16px;"><% for(let s=0;s<5;s++){ %><i class="fa-solid fa-star"></i><% } %></div>
+          <div style="color:var(--text-muted);font-size:13.5px;">Based on <%= product.reviewCount %> verified reviews</div>
+        </div>
+      </div>
+      <h5 style="font-size:15px;margin-bottom:14px;">Customer Photos</h5>
+      <div class="review-photos">
+        <% reviewImages.forEach(img => { %>
+          <div class="review-photo"><img src="<%= img %>" alt="Customer wearing frame"></div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Products -->
+  <div class="section-head reveal">
+    <div><h2>You May Also Like</h2></div>
+  </div>
+  <div class="product-grid" style="margin-bottom:60px;">
+    <% related.forEach(p => { %>
+      <%- include('../partials/product-card', { p }) %>
+    <% }) %>
+  </div>
+</div>
+
+<!-- Virtual Try-On Modal -->
+<div class="modal fade" id="vtoModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius:20px;border:none;">
+      <div class="modal-header" style="border:none;">
+        <h5 class="modal-title font-display">Virtual Try-On</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-center" style="padding:0 30px 30px;">
+        <img src="<%= product.image %>" style="max-height:220px;margin-bottom:20px;">
+        <p style="color:var(--text-muted);font-size:14px;">For the full AI-powered try-on experience with face scanning, head to our dedicated Virtual Try-On studio.</p>
+        <a href="/virtual-try-on" class="btn-lux">Open Full Try-On Studio</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

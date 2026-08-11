@@ -1,0 +1,28 @@
+<%
+  const images = p.images || [];
+  const modelImg = images.find(i => i.includes('_m0') || i.includes('_w0')) || p.image;
+  const discountedPrice = p.discount > 0 ? Math.round(p.price * (1 - p.discount / 100)) : p.price;
+%>
+<div class="product-card">
+  <a href="/products/<%= p.id %>">
+    <div class="card-media">
+      <% if (p.isNew) { %><span class="badge-pill">New Arrival</span>
+      <% } else if (p.discount > 0) { %><span class="badge-pill discount"><%= p.discount %>% OFF</span><% } %>
+      <div class="wish-btn" onclick="event.preventDefault()"><i class="fa-regular fa-heart"></i></div>
+      <img src="<%= p.image %>" alt="<%= p.name %>" class="main-img">
+      <img src="<%= modelImg %>" alt="<%= p.name %> worn" class="model-img">
+    </div>
+    <div class="card-body">
+      <div class="brand-tag"><%= p.brand %> · <%= p.style %></div>
+      <h4><%= p.name %></h4>
+      <div class="stars">
+        <% for(let s=0; s<5; s++){ %><i class="fa-solid fa-star"></i><% } %>
+        <span style="color:#999;font-size:11.5px;">(<%= p.reviewCount %>)</span>
+      </div>
+      <div class="card-price" style="margin-top:8px;">
+        <span class="price-now">₹<%= discountedPrice.toLocaleString('en-IN') %></span>
+        <% if (p.discount > 0) { %><span class="price-old">₹<%= p.price.toLocaleString('en-IN') %></span><% } %>
+      </div>
+    </div>
+  </a>
+</div>

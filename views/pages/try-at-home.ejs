@@ -1,0 +1,30 @@
+<%- include('../partials/header', { pageTitle: 'Try at Home — VisionVogue' }) %>
+
+<div class="container-xl" style="padding:60px 24px 90px;">
+  <div class="text-center reveal" style="margin-bottom:50px;">
+    <h2 style="font-size:38px;">Try at Home</h2>
+    <p style="color:var(--text-muted);">Select up to 4 frames. We'll ship them free — try them on, keep what you love.</p>
+  </div>
+  <div class="row">
+    <% const steps = [
+      { icon: 'fa-list-check', title: '1. Choose Frames', desc: 'Pick up to 4 styles you love from our collection.' },
+      { icon: 'fa-truck-fast', title: '2. Free Home Delivery', desc: 'We ship them to your doorstep at no cost.' },
+      { icon: 'fa-clock', title: '3. 7-Day Trial', desc: 'Try each frame for up to a week in your own light.' },
+      { icon: 'fa-rotate-left', title: '4. Keep or Return', desc: 'Order the one you love, return the rest for free.' }
+    ]; %>
+    <% steps.forEach(s => { %>
+      <div class="col-lg-3 col-md-6 mb-4 text-center reveal">
+        <div style="width:70px;height:70px;border-radius:50%;background:var(--ivory);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
+          <i class="fa-solid <%= s.icon %>" style="font-size:26px;color:var(--gold);"></i>
+        </div>
+        <h5><%= s.title %></h5>
+        <p style="color:var(--text-muted);font-size:14px;"><%= s.desc %></p>
+      </div>
+    <% }) %>
+  </div>
+  <div class="text-center" style="margin-top:20px;">
+    <a href="/products" class="btn-lux">Start Selecting Frames</a>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

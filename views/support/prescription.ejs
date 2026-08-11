@@ -1,0 +1,25 @@
+<%- include('../partials/header', { pageTitle: 'Prescription Guide — VisionVogue' }) %>
+
+<div class="container-xl" style="padding:36px 24px 90px;">
+  <h2 class="reveal">Understanding Your Prescription</h2>
+  <div class="row" style="margin-top:20px;">
+    <div class="col-lg-3 mb-4"><%- include('../partials/support-sidebar') %></div>
+    <div class="col-lg-9">
+      <div class="sidebar-filter reveal">
+        <h5>Key Terms</h5>
+        <table class="spec-table" style="margin-top:10px;">
+          <tr><td>OD (Oculus Dexter)</td><td>Your right eye</td></tr>
+          <tr><td>OS (Oculus Sinister)</td><td>Your left eye</td></tr>
+          <tr><td>SPH (Sphere)</td><td>Lens power to correct near/farsightedness</td></tr>
+          <tr><td>CYL (Cylinder)</td><td>Lens power for astigmatism correction</td></tr>
+          <tr><td>AXIS</td><td>Orientation of astigmatism correction (0-180°)</td></tr>
+        </table>
+        <p style="color:var(--text-muted);font-size:14px;margin-top:16px;">
+          Enter these values in the "Prescription" section on any product page, or upload a photo of your prescription during checkout.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

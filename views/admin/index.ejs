@@ -1,0 +1,62 @@
+<%- include('../partials/header', { pageTitle: 'Admin Dashboard — VisionVogue' }) %>
+
+<div class="container-xl" style="padding:36px 24px 90px;">
+  <h2 class="reveal">Admin Dashboard</h2>
+  <div class="row" style="margin-top:24px;">
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="sidebar-filter reveal">
+        <i class="fa-solid fa-glasses" style="color:var(--gold);font-size:22px;"></i>
+        <h3 style="margin:10px 0 0;"><%= productCount %></h3>
+        <p style="color:var(--text-muted);font-size:13.5px;">Total Products</p>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="sidebar-filter reveal">
+        <i class="fa-solid fa-receipt" style="color:var(--gold);font-size:22px;"></i>
+        <h3 style="margin:10px 0 0;"><%= orderCount %></h3>
+        <p style="color:var(--text-muted);font-size:13.5px;">Total Orders</p>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="sidebar-filter reveal">
+        <i class="fa-solid fa-indian-rupee-sign" style="color:var(--gold);font-size:22px;"></i>
+        <h3 style="margin:10px 0 0;">₹<%= Math.round(revenue).toLocaleString('en-IN') %></h3>
+        <p style="color:var(--text-muted);font-size:13.5px;">Total Revenue</p>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="sidebar-filter reveal">
+        <i class="fa-solid fa-triangle-exclamation" style="color:var(--danger);font-size:22px;"></i>
+        <h3 style="margin:10px 0 0;"><%= lowStock.length %></h3>
+        <p style="color:var(--text-muted);font-size:13.5px;">Low Stock Alerts</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-7 mb-4">
+      <div class="sidebar-filter reveal">
+        <h5>Recent Orders</h5>
+        <table class="spec-table">
+          <% orders.forEach(o => { %>
+            <tr><td>#<%= o.orderNumber %></td><td>₹<%= (o.totalAmount || 0).toLocaleString('en-IN') %> · <%= o.status || 'Processing' %></td></tr>
+          <% }) %>
+          <% if (!orders.length) { %><tr><td colspan="2" style="color:#999;">No orders yet.</td></tr><% } %>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-5 mb-4">
+      <div class="sidebar-filter reveal">
+        <h5>Low Stock Products</h5>
+        <table class="spec-table">
+          <% lowStock.forEach(p => { %>
+            <tr><td><%= p.name %></td><td><%= p.stock %> left</td></tr>
+          <% }) %>
+          <% if (!lowStock.length) { %><tr><td colspan="2" style="color:#999;">All stock levels healthy.</td></tr><% } %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

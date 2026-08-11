@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle : 'VisionVogue — Luxury Eyewear' %></title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/brand/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/brand/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/brand/favicon-180.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="announce-bar">
+    <span><i class="fa-solid fa-truck"></i> Free Shipping over ₹999</span>
+    <span><i class="fa-solid fa-phone"></i> Toll Free: 1800-123-4567</span>
+    <span><i class="fa-solid fa-shield-halved"></i> 100% Certified Eyewear</span>
+  </div>
+
+  <nav class="navbar-luxury">
+    <div class="container-fluid px-3 px-md-4 navbar-inner">
+      <a href="/" class="brand-logo me-3">
+        <img src="/images/brand/logo-navbar-light.png" alt="VisionVogue" class="brand-logo-img">
+      </a>
+
+      <div class="nav-menu">
+        <div class="nav-item">
+          <a href="/products/category/Eyeglasses" class="nav-link">Eyeglasses</a>
+          <div class="mega-menu">
+            <div class="mega-grid">
+              <div class="mega-col">
+                <h4><i class="fa-solid fa-mars text-gold me-1"></i> Men's Collection</h4>
+                <ul>
+                  <li><a href="/products/category/Eyeglasses?gender=Men" class="fw-bold text-dark">All Men's Eyeglasses &rarr;</a></li>
+                  <li><a href="/products/category/Eyeglasses?style=Rectangle&gender=Men">Full Rim Frames</a></li>
+                  <li><a href="/products/category/Eyeglasses?gender=Men">Half Rim Frames</a></li>
+                  <li><a href="/products/category/Eyeglasses?style=Aviator&gender=Men">Aviator Eyeglasses</a></li>
+                  <li><a href="/products/category/Eyeglasses?style=Square&gender=Men">Square & Wayfarer</a></li>
+                  <li><a href="/products/category/Eyeglasses?style=Round&gender=Men">Round Vintage Frames</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4><i class="fa-solid fa-venus text-gold me-1"></i> Women's Collection</h4>
+                <ul>
+                  <li><a href="/products/category/Eyeglasses?gender=Women" class="fw-bold text-dark">All Women's Eyeglasses &rarr;</a></li>
+                  <li><a href="/products/category/Eyeglasses?style=Cat Eye&gender=Women">Cat Eye Frames</a></li>
+                  <li><a href="/products/category/Eyeglasses?style=Round&gender=Women">Round Acetate</a></li>
+                  <li><a href="/products/category/Eyeglasses?gender=Women">Oversized Luxury</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4><i class="fa-solid fa-star text-gold me-1"></i> Kids & Special Power</h4>
+                <ul>
+                  <li><a href="/special-power">Special Power Lenses</a></li>
+                  <li><a href="/products/category/Eyeglasses">Zero Power Blue Light</a></li>
+                  <li><a href="/products/category/Eyeglasses">Progressive Multi-Focal</a></li>
+                  <li><a href="/products/category/Eyeglasses">Reading Readers</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="/products/category/Sunglasses" class="nav-link">Sunglasses</a>
+          <div class="mega-menu">
+            <div class="mega-grid">
+              <div class="mega-col">
+                <h4><i class="fa-solid fa-mars text-gold me-1"></i> Men's Collection</h4>
+                <ul>
+                  <li><a href="/products/category/Sunglasses?gender=Men" class="fw-bold text-dark">All Men's Sunglasses &rarr;</a></li>
+                  <li><a href="/products/category/Sunglasses?style=Aviator&gender=Men">Polarized Aviator</a></li>
+                  <li><a href="/products/category/Sunglasses?style=Square&gender=Men">Square Sunglasses</a></li>
+                  <li><a href="/products/category/Sunglasses?gender=Men">Classic Wayfarer</a></li>
+                  <li><a href="/products/category/Sunglasses?style=Round&gender=Men">Round Metal Frames</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4><i class="fa-solid fa-venus text-gold me-1"></i> Women's Collection</h4>
+                <ul>
+                  <li><a href="/products/category/Sunglasses?gender=Women" class="fw-bold text-dark">All Women's Sunglasses &rarr;</a></li>
+                  <li><a href="/products/category/Sunglasses?style=Cat Eye&gender=Women">Cat Eye Sunglasses</a></li>
+                  <li><a href="/products/category/Sunglasses?style=Round&gender=Women">Round Vintage</a></li>
+                  <li><a href="/products/category/Sunglasses?gender=Women">Oversized Glam</a></li>
+                </ul>
+              </div>
+              <div class="mega-col">
+                <h4><i class="fa-solid fa-sun text-gold me-1"></i> Trending Optics</h4>
+                <ul>
+                  <li><a href="/products/category/Sunglasses?tier=sale">On Sale (35% Off)</a></li>
+                  <li><a href="/products/category/Sunglasses">Polarized UV400</a></li>
+                  <li><a href="/products/category/Sunglasses">Photochromic Transition</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/special-power" class="nav-link" style="height:auto;">Special Power</a>
+        <a href="/try-at-home" class="nav-link" style="height:auto;">Try @ Home</a>
+        <a href="/virtual-try-on" class="nav-link" style="height:auto;">Virtual Try-On</a>
+        <a href="/stores" class="nav-link" style="height:auto;">Stores</a>
+        <a href="/contacts" class="nav-link" style="height:auto;">Contacts</a>
+      </div>
+
+      <div class="nav-actions">
+        <div class="search-wrap d-none d-lg-block">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="navSearchInput" class="search-input" placeholder="Search eyewear...">
+          <div class="search-suggest" id="searchSuggest"></div>
+        </div>
+        <i class="fa-regular fa-heart icon-btn"></i>
+        <a href="/cart" class="icon-btn" style="position:relative;" title="View Shopping Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-badge cart-count-badge"><%= typeof cartCount !== 'undefined' ? cartCount : 0 %></span>
+        </a>
+        <% if (typeof user !== 'undefined' && user) { %>
+          <a href="/auth/profile" class="btn btn-outline-warning btn-sm d-inline-flex align-items-center gap-1 py-1 px-2" style="font-size:12px; border-color:var(--gold); color:var(--gold-soft);" title="View My Account Dashboard">
+            <i class="fa-solid fa-user-gear"></i>
+            <span class="d-none d-md-inline fw-semibold"><%= user.name.split(' ')[0] %></span>
+          </a>
+          <a href="/auth/logout" class="icon-btn ms-1" title="Logout"><i class="fa-solid fa-right-from-bracket" style="font-size:16px; color:#aaa;"></i></a>
+        <% } else { %>
+          <a href="/auth/login" class="icon-btn" title="Login / Register"><i class="fa-regular fa-user"></i></a>
+        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <% if (typeof messages !== 'undefined' && (messages.success || messages.error)) { %>
+    <div class="container-xl" style="padding-top:16px;">
+      <% if (messages.success) { %><div class="alert alert-success"><%= messages.success[0] %></div><% } %>
+      <% if (messages.error) { %><div class="alert alert-danger"><%= messages.error[0] %></div><% } %>
+    </div>
+  <% } %>

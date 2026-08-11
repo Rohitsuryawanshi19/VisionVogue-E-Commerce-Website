@@ -1,0 +1,83 @@
+<%- include('../partials/header', { pageTitle: category + ' — VisionVogue' }) %>
+
+<div class="container-xl" style="padding-top:36px;">
+  <% if (category === 'Eyeglasses') { %>
+    <div class="seasonal-banner reveal" style="height:260px;margin-bottom:36px;">
+      <img src="/images/marketing/eyeglasses-mood-banner.jpg" alt="Eyeglasses Collection">
+      <div class="seasonal-content">
+        <div class="hero-eyebrow">Eyeglasses Edit</div>
+        <h3 style="font-size:28px;">Wear the Mood</h3>
+      </div>
+    </div>
+  <% } else if (category === 'Sunglasses') { %>
+    <div class="seasonal-banner reveal" style="height:260px;margin-bottom:36px;">
+      <img src="/images/marketing/sunglasses-vision-banner.jpg" alt="Sunglasses Collection">
+      <div class="seasonal-content">
+        <div class="hero-eyebrow">Sunglasses Edit · 35% Off</div>
+        <h3 style="font-size:28px;">Elevate Your Vision</h3>
+      </div>
+    </div>
+  <% } %>
+
+  <div class="section-head reveal" style="margin-top:0;">
+    <div>
+      <h2><%= category %></h2>
+      <p><%= products.length %> frames found</p>
+    </div>
+  </div>
+
+  <div class="filter-pills reveal">
+    <div class="filter-pill <%= !query.tier ? 'active' : '' %>" data-tier="all">All Items</div>
+    <div class="filter-pill <%= query.tier === 'essential' ? 'active' : '' %>" data-tier="essential">Essential (&lt;₹2500)</div>
+    <div class="filter-pill <%= query.tier === 'premium' ? 'active' : '' %>" data-tier="premium">Premium (&ge;₹2500)</div>
+    <div class="filter-pill <%= query.tier === 'sale' ? 'active' : '' %>" data-tier="sale">Sale</div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3 mb-4">
+      <div class="sidebar-filter reveal">
+        <div class="filter-group">
+          <h5>Search</h5>
+          <input type="text" class="form-control" placeholder="Search frames..." id="sidebarSearch"
+                 style="border-radius:8px;padding:10px 14px;border:1px solid #ddd;width:100%;">
+        </div>
+        <div class="filter-group">
+          <h5>Frame Shape</h5>
+          <% ['Round','Rectangle','Cat Eye','Square','Oval','Browline','Rimless','Aviator'].forEach(s => { %>
+            <label><input type="checkbox" onchange="location.href='?style=<%= encodeURIComponent(s) %>'" <%= query.style === s ? 'checked' : '' %>> <%= s %></label>
+          <% }) %>
+        </div>
+        <div class="filter-group">
+          <h5>Price Range</h5>
+          <label><input type="checkbox" onchange="location.href='?priceMax=8000'"> Under ₹8,000</label>
+          <label><input type="checkbox" onchange="location.href='?priceMax=12000'"> ₹8,000 – ₹12,000</label>
+          <label><input type="checkbox" onchange="location.href='?tier=premium'"> Above ₹15,000</label>
+        </div>
+        <div class="filter-group">
+          <h5>Gender</h5>
+          <% ['Men','Women','Unisex'].forEach(g => { %>
+            <label><input type="checkbox" onchange="location.href='?gender=<%= g %>'" <%= query.gender === g ? 'checked' : '' %>> <%= g %></label>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-9">
+      <% if (products.length === 0) { %>
+        <div class="empty-state reveal">
+          <i class="fa-solid fa-glasses" style="font-size:40px;color:#ddd;"></i>
+          <p style="margin-top:16px;">No frames match these filters. Try clearing a filter.</p>
+          <a href="/products" class="btn-outline-lux">Clear Filters</a>
+        </div>
+      <% } else { %>
+        <div class="product-grid">
+          <% products.forEach(p => { %>
+            <%- include('../partials/product-card', { p }) %>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
