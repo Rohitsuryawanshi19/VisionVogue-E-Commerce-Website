@@ -117,7 +117,9 @@ Visit **`http://localhost:5000`** in your browser.
 
 ## Quick Start
 npm install
+
 node seed-from-dataset.js
+
 node app.js
 
 ## 👨‍💻 Author
