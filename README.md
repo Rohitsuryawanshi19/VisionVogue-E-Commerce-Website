@@ -93,18 +93,12 @@ Ensure you have the following installed on your machine:
 - **Node.js** (v18.0.0 or higher)
 - **MongoDB Server** running locally on port `27017`
 
-### 2. Clone Repository
-```bash
-git clone https://github.com/Rohitsuryawanshi19/VisionVogue-E-Commerce-Website.git
-cd VisionVogue-E-Commerce-Website
-```
-
-### 3. Install Dependencies
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### 4. Configure Environment Variables (`.env`)
+### 3. Configure Environment Variables (`.env`)
 Create a `.env` file in the root project directory:
 ```env
 PORT=5000
@@ -112,7 +106,7 @@ MONGODB_URI=mongodb://127.0.0.1:27017/VisionVogue
 SESSION_SECRET=visionvogue_luxury_eyewear_secret_2026
 ```
 
-### 5. Launch Dev Server
+### 4. Launch Dev Server
 ```bash
 node app.js
 ```
