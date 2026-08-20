@@ -15,34 +15,44 @@ function buildWhere(query) {
 }
 
 router.get('/', async (req, res) => {
-  const where = buildWhere(req.query);
-  const products = await Product.find(where).sort({ createdAt: -1 });
-  res.render('products/index', {
-    products, category: 'All Collections', query: req.query, activePage: 'products'
-  });
+  try {
+    const where = buildWhere(req.query);
+    const products = await Product.find(where).sort({ createdAt: -1 });
+    res.render('products/index', {
+      products, category: 'All Collections', query: req.query, activePage: 'products'
+    });
+  } catch (err) {
+    res.render('products/index', {
+      products: [], category: 'All Collections', query: req.query, activePage: 'products'
+    });
+  }
 });
 
 router.get('/category/:cat', async (req, res) => {
   const cat = req.params.cat;
-  const where = buildWhere(req.query);
-  where.category = new RegExp('^' + cat + '$', 'i');
-  const products = await Product.find(where).sort({ createdAt: -1 });
-  res.render('products/index', {
-    products, category: cat, query: req.query, activePage: 'products'
-  });
+  try {
+    const where = buildWhere(req.query);
+    where.category = new RegExp('^' + cat + '$', 'i');
+    const products = await Product.find(where).sort({ createdAt: -1 });
+    res.render('products/index', {
+      products, category: cat, query: req.query, activePage: 'products'
+    });
+  } catch (err) {
+    res.render('products/index', {
+      products: [], category: cat, query: req.query, activePage: 'products'
+    });
+  }
 });
 
 router.get('/:id', async (req, res) => {
-  let product;
   try {
-    product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).render('404');
+    const related = await Product.find({ category: product.category, _id: { $ne: product._id } }).limit(4);
+    res.render('products/show', { product, related, activePage: 'products' });
   } catch (err) {
-    // Invalid ObjectId format
-    return res.status(404).render('404');
+    res.status(404).render('404');
   }
-  if (!product) return res.status(404).render('404');
-  const related = await Product.find({ category: product.category, _id: { $ne: product._id } }).limit(4);
-  res.render('products/show', { product, related, activePage: 'products' });
 });
 
 module.exports = router;

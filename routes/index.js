@@ -3,12 +3,17 @@ const router = express.Router();
 const { Product } = require('../models');
 
 router.get('/', async (req, res) => {
-  const [newArrivals, bestSellers, sunglasses] = await Promise.all([
-    Product.find({ isNew: true }).limit(8),
-    Product.find().sort({ reviewCount: -1 }).limit(8),
-    Product.find({ category: 'Sunglasses' }).limit(8)
-  ]);
-  res.render('index', { newArrivals, bestSellers, sunglasses, activePage: 'home' });
+  try {
+    const [newArrivals, bestSellers, sunglasses] = await Promise.all([
+      Product.find({ isNew: true }).limit(8),
+      Product.find().sort({ reviewCount: -1 }).limit(8),
+      Product.find({ category: 'Sunglasses' }).limit(8)
+    ]);
+    res.render('index', { newArrivals, bestSellers, sunglasses, activePage: 'home' });
+  } catch (err) {
+    console.warn('Database query fallback:', err.message);
+    res.render('index', { newArrivals: [], bestSellers: [], sunglasses: [], activePage: 'home' });
+  }
 });
 
 router.get('/search', async (req, res) => {
