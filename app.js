@@ -44,10 +44,12 @@ app.use((req, res) => {
   res.status(404).render('404');
 });
 
-connectDB().then(() => {
+connectDB();
+
+if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`VisionVogue running at http://localhost:${PORT}`);
   });
-});
+}
 
 module.exports = app;
